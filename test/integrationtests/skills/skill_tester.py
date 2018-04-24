@@ -310,8 +310,10 @@ class EvaluationRule(object):
 
         # Check for expected data structure
         if test_case.get('expected_data'):
+            _d = ['and']
             for item in test_case['expected_data'].items():
-                _x.append(['equal', str(item[0]), str(item[1])])
+                _d.append(['equal', str(item[0]), str(item[1])])
+            self.rule.append(_d)
 
         if _x != ['and']:
             self.rule.append(_x)
@@ -388,7 +390,6 @@ class EvaluationRule(object):
             Returns:
                  Bool: True if a partial evaluation succeeded
         """
-
         if rule[0] == 'equal':
             if self._get_field_value(rule[1], msg) != rule[2]:
                 return False
